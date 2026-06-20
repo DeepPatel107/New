@@ -1,0 +1,214 @@
+PROMPT 1:
+Write bioler plate code for cpp in A.cpp
+
+RESULT :
+#include <bits/stdc++.h>
+using namespace std;
+#define ll long long
+#define vi vector<int>
+#define vll vector<long long>
+#define pii pair<int, int>
+#define pb push_back
+#define all(x) (x).begin(), (x).end()
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+    // your code here
+    return 0;
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 2:
+Explain the code in A.cpp file. 
+
+RESULT :
+
+Overview
+This is a small interactive console program. It asks the user for a name, age, and a list of numbers, then prints them back.
+
+Line-by-line
+Header and namespace
+#include <bits/stdc++.h>
+using namespace std;
+#include <bits/stdc++.h> — Pulls in most common C++ standard library headers (iostream, string, vector, etc.) in one line. Common in competitive programming; mainly works with GCC/MinGW.
+using namespace std; — Lets you write cout, cin, string, vector without the std:: prefix.
+main() — program entry point
+int main() {
+Every C++ program starts here. int means it returns an integer exit code (0 = success).
+
+Name input
+    cout<<"Nter your name:";
+    string name;
+    cin>>name;
+    cout<<"Hello "<<name<<endl;
+cout — Prints text to the terminal.
+string name — Stores the user’s name as text.
+cin >> name — Reads one word from input (stops at whitespace).
+endl — Prints a newline and flushes the output buffer.
+Note: Line 5 has a typo — "Nter" should probably be "Enter".
+
+Age input
+    cout<<"Enter your age:";
+    int age;
+    cin>>age;
+    cout<<"You are "<<age<<" years old"<<endl;
+int age — Stores a whole number.
+cin >> age — Reads an integer from input.
+The program then prints a message using that value.
+Vector — storing multiple numbers
+    vector<int> store;
+    cout<<"Enter the number of elements:";
+    int n;
+    cin>>n;
+    for(int i=0;i<n;i++){
+        int x;
+        cin>>x;
+        store.push_back(x);
+    }
+vector<int> store — A dynamic array that can grow; holds integers.
+n — How many numbers the user will enter.
+for loop — Runs n times:
+Reads one integer x each time.
+store.push_back(x) — Appends x to the end of the vector.
+Example: if n = 3 and you type 10 20 30, store becomes [10, 20, 30].
+
+Printing the vector
+    cout<<"The elements are:";
+    for(int i=0;i<n;i++){
+        cout<<store[i]<<" ";
+    }
+    cout<<endl;
+Loops from i = 0 to i = n - 1.
+store[i] — Accesses the element at index i (0-based: first element is store[0]).
+Prints each number followed by a space, then a newline at the end.
+End of program
+    return 0;
+}
+return 0 — Tells the OS the program finished successfully.
+ — Closes main().
+Example run
+
+Enter your name: Alice
+Hello Alice
+Enter your age: 20
+You are 20 years old
+Enter the number of elements: 3
+10 20 30
+The elements are: 10 20 30
+
+flowchart TD
+    A[Start] --> B[Ask name]
+    B --> C[Read name, print hello]
+    C --> D[Ask age]
+    D --> E[Read age, print message]
+    E --> F[Ask count n]
+    F --> G[Loop n times: read x, push to vector]
+    G --> H[Loop n times: print vector elements]
+    H --> I[return 0]
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 3 :
+Make a sorting function which returns a new sorted vector and takes the original vector as input. This function will use the logic of merge sort.
+
+RESULT :
+
+vector<int> merge(const vector<int>& left, const vector<int>& right) {
+    vector<int> result;
+    result.reserve(left.size() + right.size());
+
+    size_t i = 0, j = 0;
+    while (i < left.size() && j < right.size()) {
+        if (left[i] <= right[j]) {
+            result.push_back(left[i++]);
+        } else {
+            result.push_back(right[j++]);
+        }
+    }
+    while (i < left.size()) result.push_back(left[i++]);
+    while (j < right.size()) result.push_back(right[j++]);
+
+    return result;
+}
+
+vector<int> mergeSortHelper(vector<int> arr) {
+    if (arr.size() <= 1) {
+        return arr;
+    }
+
+    size_t mid = arr.size() / 2;
+    vector<int> left(arr.begin(), arr.begin() + mid);
+    vector<int> right(arr.begin() + mid, arr.end());
+
+    left = mergeSortHelper(left);
+    right = mergeSortHelper(right);
+
+    return merge(left, right);
+}
+
+vector<int> mergeSort(const vector<int>& original) {
+    return mergeSortHelper(original);
+}
+
+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+PROMPT 4:
+Improve the previous prompt which makes the agent work more efficiently.
+
+RESULT :
+
+In A.cpp, add a merge sort that:
+- Takes `const vector<int>&` as input
+- Returns a new sorted vector (ascending); do not modify the input
+- Split into: `merge()`, private recursive helper, and public `mergeSort()`
+- Place functions above `main()`
+- In `main()`, after reading `store`, call `mergeSort(store)` and print the sorted result
+- Compile with g++ and verify with input: 5 elements → 3 1 4 1 5 → output 1 1 3 4 5
+- Do not change unrelated code (name/age I/O)
+
+Improved prompt (reusable template)
+For future C++ tasks in this project:
+
+**File:** A.cpp
+**Task:** [one sentence — what to build]
+**API:**
+- Function: [name and signature]
+- Input: [type, const or not]
+- Output: [return type / behavior]
+- Constraints: [e.g. immutable input, O(n log n), no STL sort]
+**Structure:**
+- [helper functions if any]
+- Where to place code: [above main / new file / etc.]
+**Integration:**
+- [wire into main / standalone only / don't touch main]
+**Scope:**
+- Change only: [list files/lines]
+- Do not change: [existing I/O, boilerplate, etc.]
+**Done when:**
+- [ ] Compiles with g++
+- [ ] [specific test case or behavior]
+
+Example filled in for your merge sort task
+
+**File:** A.cpp
+**Task:** Implement merge sort as a function that returns a new sorted vector.
+**API:**
+- `vector<int> mergeSort(const vector<int>& original)`
+- Ascending order, stable sort preferred
+- Original vector must remain unchanged
+**Structure:**
+- `merge(left, right)` — merge two sorted halves
+- `mergeSortHelper(vector<int> arr)` — recursive divide & conquer
+- `mergeSort(...)` — public wrapper
+**Integration:**
+- After printing `store`, call merge sort and print `Sorted elements:`
+**Scope:**
+- Add functions only above `main()`
+- Do not refactor name/age prompts or fix typos unless asked
+**Done when:**
+- g++ A.cpp compiles
+- Input `3 1 4 1 5` → `1 1 3 4 5`
+
+
+
