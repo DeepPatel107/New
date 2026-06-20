@@ -1,0 +1,3 @@
+{"sessionId":"02d04b","runId":"post-fix","hypothesisId":"H2","location":"Question.cpp:solve:hit","message":"target reached zero","data":{"i":1,"n":4,"target":0},"timestamp":1781953596048}
+{"sessionId":"02d04b","runId":"post-fix","hypothesisId":"H2","location":"Question.cpp:solve:hit","message":"target reached zero","data":{"i":3,"n":4,"target":0},"timestamp":1781953596048}
+{"sessionId":"02d04b","runId":"post-fix","hypothesisId":"H2","location":"Question.cpp:solve:hit","message":"target reached zero","data":{"i":2,"n":3,"target":0},"timestamp":1781953596048}
